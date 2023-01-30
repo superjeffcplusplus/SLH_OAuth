@@ -94,7 +94,7 @@ Je considère ici que Facebook a une très large audience et qu'elle a besoin de
 > **(c)** What are the differences between having PKCE enabled and using a client secret? Are the attacks prevented by both mechanisms identical ?
 
 
-A.
+a.
 ---
 Contrairement à la question 2, nous supposons ici que l'application cliente est native et que la communication entre le navigateur internet et cette application est vulnérable. Un attaquant a la possibilité, via une application malveillante, de s'inscrire sur le canal de communication qui permet de révupérer l'`Authorization code`.  
 
@@ -102,11 +102,11 @@ Contrairement à la question 2, nous supposons ici que l'application cliente est
 
 ![](./SLH_OAuth_PKCE.png)
 
-B.
+b.
 ---
-Il s'agit de l'attaque de vol de code d'authorisation. L'attaquant profite d'une éventuelle non protection de la transmission de l'`Authorization code` du `User Agent` au `Client` (flèche en rouge sur le diagramme). L'attaquant peu alors se faire passer pour un client légitime en s'autentifiant auprès du serveur d'autorisation.
+Il s'agit de l'attaque de vol de code d'autorisation. L'attaquant profite d'une éventuelle non protection de la transmission de l'`Authorization code` du `User Agent` au `Client` (flèche en rouge sur le diagramme). L'attaquant peu alors se faire passer pour un client légitime en s'autentifiant auprès du serveur d'autorisation. Cela peut se faire grâce à une application malveillante installée sur la machine de la victime qui serait capable de s'abonner au système de diffusione de messages entre les applications. On pourrait par exemple imaginer, sur PC, que le client et le User-Agent communiquent à l'aide d'un socket TCP disponible sur `localhost`, et que  l'application malveillante parvienne à ouvrir ce socket.   
 
-C.
+c.
 ---
 PKCE est utilisé dans les cas où il est impossible de cacher un sercret dans le client. Dans les faits, il s'agit de toutes les applications distribuées sur des PC, des mobiles, ou des applications WEB. Dans tous ces cas, il serait possible, par *reverse engeneering*, de récupérer un sercret d'authentification dans le code source. Ces clients sont donc considérés comme non fiables.  
 Un *client secret* est utilisé dans le cas des clients fiables, par exemple les clients tournant sur des serveurs. Dans ce cas, il existe des moyens efficaces de protéger l'environnement dans lequel tourne le client. Celui-ci peut donc accéder à un secret, par exemple stocké dans une variable d'environnement. Dans ce cas, on considère que le vol de code d'autorisation n'est pas une menace directe. Il faudrait compromettre le serveur avant d'y arriver. PKCE n'est donc pas utilisé dans ce cas.
