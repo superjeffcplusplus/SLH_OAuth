@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-30T13:10:23.339Z" agent="5.0 (Macintosh)" etag="ba2GAXDWUWOxP3cadR_M" version="20.6.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-30T13:39:49.683Z" agent="5.0 (Macintosh)" etag="iOZq1tJI0RQmvGkztEFj" version="20.6.1" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="1301" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -22,7 +22,7 @@
             <mxPoint x="680" y="120" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="yCl33F0Dx31L52aOU04u-5" value="Facebook User " style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="yCl33F0Dx31L52aOU04u-5" value="&lt;div&gt;Facebook User &lt;/div&gt;(Resource Owner)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="60" y="60" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="yCl33F0Dx31L52aOU04u-6" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;GraphApp&lt;/div&gt;(Client)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
