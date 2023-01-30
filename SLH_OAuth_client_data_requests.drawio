@@ -1,1 +1,72 @@
-<mxfile host="app.diagrams.net" modified="2023-01-30T13:40:36.222Z" agent="5.0 (Macintosh)" version="20.6.1" etag="fwgH1pSGdIgVqG-1O7U_" type="github"><diagram id="gKue1p-kb-LZN4-yB-Wn">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-01-30T13:47:38.588Z" agent="5.0 (Macintosh)" version="20.6.1" etag="yw5Bo9-yT5cD88rgMGfY" type="github">
+  <diagram id="MQsZbv8jxyBD2R4GO-8K" name="Page-1">
+    <mxGraphModel dx="1261" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-1" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=14;" edge="1" parent="1" target="ba0Px6pdW9tXzRxWiFda-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="560" as="sourcePoint" />
+            <mxPoint x="400" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-5" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;GraphApp&lt;/div&gt;(Client)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="340" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-7" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=14;" edge="1" parent="1" target="ba0Px6pdW9tXzRxWiFda-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="960" y="560" as="sourcePoint" />
+            <mxPoint x="960" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-8" value="Resource Server" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="900" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-11" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fontSize=15;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="200" as="sourcePoint" />
+            <mxPoint x="960" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-31" value="&lt;div&gt;Asks for data in the token scope&lt;/div&gt;Sends the Access Token with the request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="ba0Px6pdW9tXzRxWiFda-11">
+          <mxGeometry x="-0.194" y="-1" relative="1" as="geometry">
+            <mxPoint x="55" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-38" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fontSize=15;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="280" as="sourcePoint" />
+            <mxPoint x="400" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-39" value="&lt;div&gt;Replies with status code 200&lt;/div&gt;&lt;div&gt;and data in the body&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="ba0Px6pdW9tXzRxWiFda-38">
+          <mxGeometry x="-0.194" y="-1" relative="1" as="geometry">
+            <mxPoint x="-55" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-40" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fontSize=15;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="960" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-41" value="&lt;div&gt;Asks for data out of the token scope&lt;/div&gt;Sends the Access Token with the request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="ba0Px6pdW9tXzRxWiFda-40">
+          <mxGeometry x="-0.194" y="-1" relative="1" as="geometry">
+            <mxPoint x="55" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-42" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fontSize=15;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="480" as="sourcePoint" />
+            <mxPoint x="400" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ba0Px6pdW9tXzRxWiFda-43" value="&lt;div&gt;Replies with status code 403 Forbidden&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="ba0Px6pdW9tXzRxWiFda-42">
+          <mxGeometry x="-0.194" y="-1" relative="1" as="geometry">
+            <mxPoint x="-55" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
