@@ -1,3 +1,6 @@
+Jean-François Pasche  
+Janvier 2023
+
 > 1. You are developing a software that takes the Facebook friends of a user and displays a nice
 friendship graph out of it. For this, you need to somehow gain access to the Facebook account of
 the user. Why isn’t it recommended in this case to use passwords ? Give all the reasons you can
@@ -7,6 +10,12 @@ L'application doit essentiellement accéder à des données qui existent sur un 
 
 
 > 2. Let’s suppose that you are using OAuth2 for managing the authorization of your Facebook friendship graph website. Draw a schema describing what are the interactions between your app, Facebook, and the user for a legitimate request (obtaining Facebook friends) and for an illegitimate request (e.g. obtaining the private messages of the user). Explain which mechanism will disallow the app to recover private messages.
+
+Pour commencer, il convient de discuter plus en détail du type d'application auquel on a affaire. Il pourrait s'agir :
+1. D'une application serveur accessible avec un navigateur internet. Dans ce cas, le navigateur ne fait qu'afficher les résultats des calculs effectués sur le serveur.
+2. D'une application client. Dans ce cas, le serveur ne fait que mettre à disposition l'application. Cette dernières est téléchargée par le navigateur du *end-user* et est entièrement exécutée dans le navigateur. Autrement dit, aucune interaction n'a lieu avec le serveur après le chargement initial de l'application.
+
+**Dans les réponses qui suivent, sauf mentionné explicitement, c'est le type (2) qui a été retenu.**  
 
 Avant tout, il est nécessaire de bien compendre les concepts suivants, utilisés par OAuth2:
 - `Resource Owner` : Il s'agit de l'utilisateur qui possède les données sur le service tier, dans notre cas l'utilisateur Facebook.
@@ -18,6 +27,8 @@ Avant tout, il est nécessaire de bien compendre les concepts suivants, utilisé
 - `Access Token` : Il s'agit du token permettant au `Client` d'accéder aux ressources du `Resource Owner`. Ce token ne doit révéler aucune information sur l'utilisateur au `Client`. Il contient une durée de validité et un *scope*, qui sont vérifiés à chaque requête par le `Resource Server`.
 - `Refresh Token` : token optionnel permettant au client de demander un nouvel `Access Token`, lorsque la validité de celui-ci échoit, sans avoir besoin d'intéragir avec l'utilisateur. Cela permet à l'`Authorization Server` de délivrer des `Access Token` token de très courte durée de validité. C'est particulièrement utile si le `Resource Server` est de type *stateless*.
 
+Nous supposons ici que l'application de graphe est une application purement client, tournant par exemple dans un navigateur web.  
+
 Ce diagramme montre les interations ayant lieu lors de l'authentification :
 ![](./SLH_OAuth_authentication.png)
 Dans l'`Access Token` délivré dans le cadre de notre application, le *scope* donne l'autorisation d'accéder uniquement aux amis de l'utilisateur (`Resource Owner`). Quant à la présence d'un `Refresh Token`, elle dépend de l'API Facebook et de son implémentation de OAuth2.
@@ -28,6 +39,11 @@ Ce diagramme montre les interations entre le `Client` et le `Resource Server` :
 Lorsque le `Resource Server` reçoit une requête, il vérifie d'abord l'athenticité et l'intégrité du token. Il vérifie aussi sa date de validité. Ensuite, il vérifie que la ressource demandée par le `Client` est comprise dans le *scope* du token, c'est-à-dire que le `Client` a le droit d'accéder à la ressource demandée. Ce mécanisme permettrait de rejeter une requête du `Client` pour les messages privés du `Resource Owner`.
 
 > 3. Your Facebook friendship graph website runs only over HTTP. Although this is bad, you cannot change this. You decide to use the OAuth2 protocol for authorization. However, by default, the requests are not signed (unlike in OAuth1). What could an adversary do ? Be precise and provide an example. Provide also a detailed technical solution that would fix the problem. Don’t forget to propose algorithms. Explain also how the keys are managed.
+
+Dans le chapitre 3.1 de la RFC 6749 (qui spécifie OAuth2), il est précisé que les *endpoints* utilisés pour l'interaction liée à OAuth2 doivent utiliser TLS. Il n'y a donc pas grand risque pour notre application. En fait, seul son chargement est un problème. Un attaquant pourrait modifier le code de l'application dans in MITM et tenter ainsi de rediriger l'utilisateur vers un site frauduleux qui se ferait passer pour Facebook.  
+Cependant, il semblerait que cette question soit plutôt destinée au cas d'une application serveur. Dans ce cas, un attaquant pratiquant un MITM pourrait récupérer l'`Authorization code` et s'identifier à la place du client légitime auprès du serveur d'authorisation.  
+Le plus simple, dans ce cas, est d'utiliser PKSE, qui est discuté à la question 6. Encore faut-il que Facebook propose cette possibilité.  
+Sinon, on pourrait utiliser une PAKE. Je pense plus particulièrement à OPAQUE, qui permet d'établir une communication confidentielle et authentifiée entre un client et un serveur, sans que le serveur ait à connaître le mot de passe du *end-user*. On utiliserait alors son mot de passe Facebook pour l'authentification. Le problème est que le *end-user* peut changer son mot de passe Facebook à tout moment. Notre application ne serait alors plus en mesure de le reconnaître.
 
 > 4. In our scenario, how would a user revoke access to his account ? Explain technically what it implies. What prevents a malicious application to reuse some previously generated tokens ?  
 
@@ -80,6 +96,10 @@ Je considère ici que Facebook a une très large audience et qu'elle a besoin de
 
 A.
 ---
+Contrairement à la question 2, nous supposons ici que l'application cliente est native et que la communication entre le navigateur internet et cette application est vulnérable. Un attaquant a la possibilité, via une application malveillante, de s'inscrire sur le canal de communication qui permet de révupérer l'`Authorization code`.  
+
+<br/>
+
 ![](./SLH_OAuth_PKCE.png)
 
 B.
@@ -97,7 +117,7 @@ Un *client secret* est utilisé dans le cas des clients fiables, par exemple les
 - Signed using a MAC algorithm (symmetric key cryptography)  
 Give a real world example of each usage (encrypted, not encrypted, digital signature, MAC). Justify your answer.
 
-**JWT chiffré**: utile si l'on ne veut pas que le client puisse lire le token, ou que le vol du token révèle de l'information sur le client. Utilisé dans OAuth2 pour les token de type Bearer.  
+**JWT chiffré**: utile si l'on ne veut pas que le client puisse lire le token, ou que le vol du token révèle de l'information sensible sur le client. Utilisé dans OAuth2 pour les token de type Bearer.
 
 **JWT non chiffré**: utile si le token ne contient aucune information sensible, ou si l'on désire que le client puisse lire les informations qui y sont contenues. C'est le cas des `ID Tokens` [utilisés par OpenID](https://www.oauth.com/oauth2-servers/openid-connect/id-tokens/). Ces derniers derniers sont destinés à fournir à l'application cliente des informations utiles, comme le nom d'utilisateur ou des *endpoints* d'API.
 
